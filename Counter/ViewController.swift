@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         placeTextView.text = "История изменений:"
         placeTextView.isEditable = false
         updateCounter()
+        
     }
     var counter = 0
     
@@ -26,7 +27,8 @@ class ViewController: UIViewController {
         counter += 1
         updateCounter()
         placeTextView.text += "\n[\(date())]: Значение изменено на +1"
-        
+        let range = NSMakeRange(placeTextView.text.count - 1, 0)
+        placeTextView.scrollRangeToVisible(range)
     }
     @IBAction func minus(_ sender: Any) {
         if counter > 0{
@@ -35,12 +37,16 @@ class ViewController: UIViewController {
         }else{
             placeTextView.text += "\n[\(date())]: Попытка уменьшить значение счетчика ниже 0"
         }
+        let range = NSMakeRange(placeTextView.text.count - 1, 0)
+        placeTextView.scrollRangeToVisible(range)
         updateCounter()
     }
     
     @IBAction func reset(_ sender: Any) {
         counter = 0
         placeTextView.text += "\n[\(date())]: Значение сброшено"
+        let range = NSMakeRange(placeTextView.text.count - 1, 0)
+        placeTextView.scrollRangeToVisible(range)
         updateCounter()
     }
     
